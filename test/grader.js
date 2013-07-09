@@ -21,11 +21,14 @@ References:
    - https://developer.mozilla.org/en-US/docs/JSON#JSON_in_Firefox_2
 */
 
+var util = require('util');
 var fs = require('fs');
 var program = require('commander');
 var cheerio = require('cheerio');
+var rest = require('restler');
 var HTMLFILE_DEFAULT = "index.html";
 var CHECKSFILE_DEFAULT = "checks.json";
+var URL_DEFAULT = "http://lit-ravine-1961.herokuapp.com";
 
 var assertFileExists = function(infile) {
     var instr = infile.toString();
@@ -44,16 +47,44 @@ var loadChecks = function(checksfile) {
     return JSON.parse(fs.readFileSync(checksfile));
 };
 
-var checkHtmlFile = function(htmlfile, checksfile) {
-    $ = cheerioHtmlFile(htmlfile);
-    var checks = loadChecks(checksfile).sort();
+var parseChecks = function(obj, checks) {
     var out = {};
     for(var ii in checks) {
-        var present = $(checks[ii]).length > 0;
-        out[checks[ii]] = present;
-    }
+        var present = obj(checks[ii]).length > 0;
+        out[checks[ii]] = present;        
+    }    
     return out;
+}
+
+var checkHtmlFile = function(htmlfile, checksfile, showfn) {
+    $ = cheerioHtmlFile(htmlfile);
+    var checks = loadChecks(checksfile).sort();
+    showfn(parseChecks($,checks));
 };
+
+var checkHtml = function(html, checksfile, showfn) {
+    $ = cheerio.load(html);
+    var checks = loadChecks(checksfile).sort();
+    return parseChecks($,checks);  
+}
+
+var buildfn = function(checksfile, showfn) {
+  var response2console = function(result, response) {
+    var out = '';
+    if (result instanceof Error) {
+      console.error('Error' + util.format(response.message));      
+    } else {
+      out = checkHtml(result, checksfile);
+    }    
+    showfn(out);
+  };
+  return response2console;
+}
+
+var checkUrl = function(url, checksfile, showfn) {
+  var response2console = buildfn(checksfile, showfn);
+  rest.get(url).on('complete', response2console);
+}
 
 var clone = function(fn) {
     // Workaround for commander.js issue.
@@ -61,14 +92,26 @@ var clone = function(fn) {
     return fn.bind({});
 };
 
+var showfn = function (checkJson) {
+    var outJson = JSON.stringify(checkJson, null, 4);
+    console.log(outJson);
+}
+
 if(require.main == module) {
     program
         .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
-        .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
+        .option('-f, --file [html_file]', 'Path to index.html', clone(assertFileExists))
+        .option('-u, --url [url]', 'Url', 'String', URL_DEFAULT)
         .parse(process.argv);
-    var checkJson = checkHtmlFile(program.file, program.checks);
-    var outJson = JSON.stringify(checkJson, null, 4);
-    console.log(outJson);
+
+    var checkJson = null;
+
+
+    if (program.file) {
+      checkJson = checkHtmlFile(program.file, program.checks, showfn);
+    } else {      
+      checkJson = checkUrl(program.url, program.checks, showfn);      
+    }        
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }
