@@ -13,88 +13,89 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800" 
           rel="stylesheet" type="text/css">
     <style type="text/css">
+
       /* Large desktop */
-      @media (min-width: 980px) {
-      body {
-      padding-top: 60px;
-      }
-      .linediv-l {
-      border-right: 1px white solid;
-      }
-      .linediv-r {
-      border-left: 1px white solid;
-      }
+      @media (min-width: 980px) { 
+        body {
+         padding-top: 60px;
+        }
+       .linediv-l {
+         border-right: 1px white solid;
+        }
+       .linediv-r {
+         border-left: 1px white solid;
+       }
       }
 
       /* Landscape phones and down */
-      @media (max-width: 480px) {
-      .copy {
-      padding: 2.5% 10%;
-      }
-      .linediv-l {
-      border-bottom: 1px white solid;
-      }
-      .linediv-r {
-      border-top: 1px white solid;
-      }
+      @media (max-width: 480px) { 
+       .copy {
+         padding: 2.5% 10%;
+       }
+       .linediv-l {
+         border-bottom: 1px white solid;
+       }
+       .linediv-r {
+         border-top: 1px white solid;
+       }
       }
 
       /* All form factors */
 
       /* Main body and headings */
-      body {
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      body{
+        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
       }
       .heading, .subheading {
-      font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-      text-align: center;
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        text-align: center;
       }
       p.lead {
-      padding-top: 1.5%;
-      font-size: 24px;
-      line-height: 30px;
+        padding-top: 1.5%;
+        font-size: 24px;
+        line-height: 30px;
       }
       p {
-      font-size: 18px;
-      line-height: 24px;
+        font-size: 18px;
+        line-height: 24px;
       }
 
       /* Video pitch and Action */
       .pitch {
-      padding: 2.5% 0%;
+        padding: 2.5% 0%;
       }
       .order {
-      padding: 2% 0%;
+        padding: 2% 0%;
       }
       .actions {
-      background-color: #343434;
-      padding: 3% 0%;
+        background-color: #343434;
+        padding: 3% 0%;
       }
       .video, .thermometer, .order, .social, .statistics {
-      text-align: center;
+        text-align: center;
       }
       .statistics h3, .statistics p {
-      color: white;
+        color: white;
       }
-      
+
       /* Marketing Copy and Footer */
       .copy {
-      padding-top: 2.5%;
-      padding-bottom: 2.5%;
-      text-align: justify;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        text-align: justify;
       }
       .asset {
-      padding: 2.5% 0%;
+        padding: 2.5% 0%;
       }
       .footer {
-      color: #cccccc;
-      text-align: center;
+        color: #cccccc;
+        text-align: center;
       }
       .footer p {
-      font-size: 11px;
+        font-size: 11px;
       }
       .footer a {
-      color: #ccccff;
+        color: #ccccff;
       }
     </style>
   </head>
@@ -102,22 +103,22 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-	<div class="container">
-	  <button type="button" class="btn btn-navbar"
-		  data-toggle="collapse" data-target=".nav-collapse">
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	  </button>
-	  <a class="brand" href="#">Bitstarder</a>
-	  <div class="nav-collapse collapse">
-	    <ul class="nav">
-	      <li class="active"><a href="#">Home</a></li>
-	      <li><a href="#about">About</a></li>
-	      <li><a href="#contact">Contact</a></li>
-	    </ul>
-	  </div>
-	</div>
+        <div class="container">
+          <button type="button" class="btn btn-navbar"
+                  data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Bitstarter</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
 
@@ -134,12 +135,13 @@
       </div>
       <div class="row-fluid pitch">
 	<div class="span5 offset1 video">
-	  <img class="img-polaroid" src="http://www.magiadopresente.com.br/images/logo.png">
+	  <img class="img-polaroid" alt="Magia do Presente" src="http://www.magiadopresente.com.br/images/logo.png">
 	</div>
 
 	<div class="span5 actions">
+      <div class="row-fluid">
 	  <div class="span8 offset2">
-	    <div class="statistics">
+	    <div class="row-fluid statistics">
 	      <div class="span4">
 		<div class="linediv-l">
 		  <h3>1000</h3> <p>backers</p>
@@ -157,24 +159,31 @@
 	      </div>
 	    </div>
 	  </div>
+      <div class="row-fluid">
 	  <div class="span10 offset1">
 	    <div class="thermometer progress active">
 	      <div class="bar bar-success" style="width: 60%;"></div>
 	      <div class="bar bar-warning" style="width: 40%;"></div>
 	    </div>
+        </div>
+        <div class="row-fluid">
 	    <div class="span6 offset3 order">
 	      <button class="btn btn-success btn-large">Preorder</button>
 	    </div>
+        </div>
+        <div class="row-fluid">
 	    <div class="span8 offset2 social">
 	      <button class="btn btn-twitter"><i class="icon-twitter"></i> | Twitter</button>
 	      <button class="btn btn-facebook"><i class="icon-facebook"></i> | Faceboot</button>
 	    </div>
+        </div>
+        </div>
 	  </div>
 	</div>
 	
 	<div class="row-fluid section1">
 	  <div class="span5 offset asset">
-	    <img class="img-polaroid" src="http://i.imgur.com/o0tThti.png">
+	    <img class="img-polaroid" alt="Placeholder" src="http://i.imgur.com/o0tThti.png">
 	  </div>
 	  <div class="span5 copy">
 	    <p>
@@ -190,7 +199,7 @@
 	    </p>
 	  </div>
 	  <div class="span5 asset">
-	    <img class="img-polaroid" src="http://www.magiadopresente.com.br/images/teaser-institucional.png">
+	    <img class="img-polaroid" alt="Placeholder" src="http://www.magiadopresente.com.br/images/teaser-institucional.png">
 	  </div>
 	</div>
 	
